@@ -178,6 +178,9 @@ body {
   border-color: var(--color-text-muted);
 }
 
+/* ── History import ─────────────────────────────────────────────────────────── */
+/* MeetingHistory uses its own CSS file; layout comes from .page gap */
+
 /* ── Footer ─────────────────────────────────────────────────────────────────── */
 .page-footer {
   font-size: 13px;

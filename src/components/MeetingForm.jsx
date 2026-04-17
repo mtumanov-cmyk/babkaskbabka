@@ -8,6 +8,7 @@ export default function MeetingForm({
   participantsStr,
   rateStr,
   isRunning,
+  currency,
   onParticipantsChange,
   onRateChange,
 }) {
@@ -46,7 +47,7 @@ export default function MeetingForm({
           disabled={isRunning}
           onChange={e => onRateChange(e.target.value)}
         />
-        <span className="form-hint">$/год на одну особу</span>
+        <span className="form-hint">{currency.symbol}/год на одну особу</span>
       </div>
     </div>
   );

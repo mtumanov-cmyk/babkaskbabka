@@ -1,6 +1,32 @@
 .meeting-display {
-  background: var(--color-bg);
   border-radius: var(--radius-input);
+  overflow: hidden;
+  border: 1px solid transparent;
+  transition: border-color 0.3s;
+}
+
+/* Red border when alarm fires (>= $100 USD equivalent) */
+.meeting-display.alarm {
+  border-color: var(--color-red);
+}
+
+.alarm-banner {
+  background: #ffe8e0;
+  color: #99231d;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 8px 16px;
+  text-align: center;
+  animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.display-body {
+  background: var(--color-bg);
   padding: 20px 24px;
   display: flex;
   align-items: center;
@@ -28,7 +54,7 @@
   letter-spacing: 0.6px;
 }
 
-/* ── Cost number ─────────────────────────────────────────────────────────── */
+/* ── Cost ────────────────────────────────────────────────────────────────── */
 .cost {
   font-size: 2.75rem;
   font-weight: 800;
@@ -68,15 +94,8 @@
   margin-top: 2px;
 }
 
-.badge-idle {
-  background: var(--color-border);
-  color: var(--color-text-muted);
-}
-
-.badge-running {
-  background: #e7f4e1;
-  color: #467427;
-}
+.badge-idle    { background: var(--color-border); color: var(--color-text-muted); }
+.badge-running { background: #e7f4e1; color: #467427; }
 
 .badge-dot {
   width: 6px;
@@ -90,16 +109,10 @@
   animation: blink 1s step-start infinite;
 }
 
-@keyframes blink {
-  50% { opacity: 0; }
-}
+@keyframes blink { 50% { opacity: 0; } }
 
+/* ── Responsive ──────────────────────────────────────────────────────────── */
 @media (max-width: 480px) {
-  .cost {
-    font-size: 2.25rem;
-  }
-
-  .timer {
-    font-size: 1.2rem;
-  }
+  .cost  { font-size: 2.25rem; }
+  .timer { font-size: 1.2rem; }
 }

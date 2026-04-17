@@ -1,35 +1,45 @@
 import { formatTime } from '../utils/formatTime';
 import './MeetingDisplay.css';
 
-/** Returns CSS class based on cost thresholds (work.ua palette). */
-function getCostColorClass(cost) {
-  if (cost < 10) return 'green';
-  if (cost < 50) return 'yellow';
+/**
+ * Threshold is compared in USD equivalent so it's currency-independent.
+ * Trigger: green < $50, yellow < $100, red >= $100 (alarm).
+ */
+function getCostColorClass(cost, currencyRate) {
+  const usd = cost / currencyRate;
+  if (usd < 50)  return 'green';
+  if (usd < 100) return 'yellow';
   return 'red';
 }
 
-/**
- * Displays live elapsed time, burned cost, and running status badge.
- */
-export default function MeetingDisplay({ elapsed, cost, isRunning }) {
-  const colorClass = getCostColorClass(cost);
+export default function MeetingDisplay({ elapsed, cost, isRunning, currency }) {
+  const colorClass = getCostColorClass(cost, currency.rate);
+  const isAlarm = cost / currency.rate >= 100;
 
   return (
-    <div className="meeting-display">
-      <div className="display-cost-wrap">
-        <span className="display-label">Спалено</span>
-        <div className={`cost ${colorClass}`}>
-          ${cost.toFixed(2)}
+    <div className={`meeting-display${isAlarm ? ' alarm' : ''}`}>
+      {isAlarm && (
+        <div className="alarm-banner">
+          🔥 Зустріч вже коштує {currency.symbol}{cost.toFixed(2)} — час завершувати!
         </div>
-      </div>
+      )}
 
-      <div className="display-timer-wrap">
-        <span className="display-label">Тривалість</span>
-        <div className="timer">{formatTime(elapsed)}</div>
-        <span className={`badge ${isRunning ? 'badge-running' : 'badge-idle'}`}>
-          <span className="badge-dot" />
-          {isRunning ? 'Іде зустріч' : 'Очікування'}
-        </span>
+      <div className="display-body">
+        <div className="display-cost-wrap">
+          <span className="display-label">Спалено</span>
+          <div className={`cost ${colorClass}`}>
+            {currency.symbol}{cost.toFixed(2)}
+          </div>
+        </div>
+
+        <div className="display-timer-wrap">
+          <span className="display-label">Тривалість</span>
+          <div className="timer">{formatTime(elapsed)}</div>
+          <span className={`badge ${isRunning ? 'badge-running' : 'badge-idle'}`}>
+            <span className="badge-dot" />
+            {isRunning ? 'Іде зустріч' : 'Очікування'}
+          </span>
+        </div>
       </div>
     </div>
   );
