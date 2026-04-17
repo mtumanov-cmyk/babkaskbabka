@@ -44,8 +44,21 @@ body {
   color: var(--color-text);
 }
 
+/* ── Background photo ───────────────────────────────────────────────────────── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: url('/bg.png') center center / cover no-repeat;
+  filter: blur(6px) brightness(0.35);
+  transform: scale(1.05); /* prevent blur edge artifacts */
+  z-index: 0;
+}
+
 /* ── Page layout ────────────────────────────────────────────────────────────── */
 .page {
+  position: relative;
+  z-index: 1;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
