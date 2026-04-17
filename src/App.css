@@ -1,0 +1,192 @@
+/* ── Design tokens (work.ua palette) ──────────────────────────────────────── */
+:root {
+  --color-bg:           #f4f5f6;
+  --color-white:        #ffffff;
+
+  --color-text:         #1f2c47;
+  --color-text-muted:   #6b7886;
+  --color-border:       #e9ebed;
+  --color-border-input: #adb8cc;
+  --color-placeholder:  #abb2ba;
+  --color-disabled-bg:  rgba(31, 44, 71, 0.08);
+
+  --color-blue:         #0080c1;
+  --color-blue-hover:   #0074ad;
+  --color-blue-focus:   #0098e5;
+
+  --color-green:        #60ac39;
+  --color-orange:       #ff9500;
+  --color-red:          #f53d00;
+
+  --radius-card:        20px;
+  --radius-btn:         10px;
+  --radius-input:       10px;
+
+  --shadow-card:        0 5px 5px 0 rgba(31, 44, 71, 0.05);
+
+  --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans",
+          Helvetica, Arial, sans-serif;
+}
+
+/* ── Reset ─────────────────────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--color-bg);
+  font-family: var(--font);
+  font-size: 18px;
+  line-height: 28px;
+  color: var(--color-text);
+}
+
+/* ── Page layout ────────────────────────────────────────────────────────────── */
+.page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px;
+  gap: 16px;
+}
+
+/* ── Header / Logo ──────────────────────────────────────────────────────────── */
+.page-header {
+  width: 100%;
+  max-width: 520px;
+}
+
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-blue);
+}
+
+.logo-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-blue);
+  flex-shrink: 0;
+}
+
+/* ── Card ───────────────────────────────────────────────────────────────────── */
+.card {
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  padding: 30px;
+  width: 100%;
+  max-width: 520px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.card-header {
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.card-title {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 32px;
+  color: var(--color-text);
+}
+
+.card-subtitle {
+  font-size: 14px;
+  color: var(--color-text-muted);
+  line-height: 20px;
+}
+
+/* ── Controls ───────────────────────────────────────────────────────────────── */
+.controls {
+  display: flex;
+  gap: 10px;
+}
+
+.btn {
+  display: inline-block;
+  padding: 7px 20px;
+  font-family: var(--font);
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 28px;
+  border-radius: var(--radius-btn);
+  border: 1px solid transparent;
+  cursor: pointer;
+  text-align: center;
+  transition: background 0.1s, border-color 0.1s, transform 0.1s;
+}
+
+.btn:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+/* Primary – blue / red when running */
+.btn-primary {
+  flex: 2;
+  background: var(--color-blue);
+  color: #fff;
+  border-color: var(--color-blue);
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: var(--color-blue-hover);
+  border-color: var(--color-blue-hover);
+}
+
+.btn-primary.running {
+  background: var(--color-red);
+  border-color: var(--color-red);
+}
+
+.btn-primary.running:hover:not(:disabled) {
+  background: #d13400;
+  border-color: #d13400;
+}
+
+.btn-primary:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* Secondary – outline */
+.btn-secondary {
+  flex: 1;
+  background: var(--color-white);
+  color: var(--color-text);
+  border-color: var(--color-border-input);
+}
+
+.btn-secondary:hover {
+  background: var(--color-bg);
+  border-color: var(--color-text-muted);
+}
+
+/* ── Footer ─────────────────────────────────────────────────────────────────── */
+.page-footer {
+  font-size: 13px;
+  color: var(--color-placeholder);
+}
+
+/* ── Responsive ─────────────────────────────────────────────────────────────── */
+@media (max-width: 480px) {
+  .card {
+    padding: 20px 16px;
+  }
+}
